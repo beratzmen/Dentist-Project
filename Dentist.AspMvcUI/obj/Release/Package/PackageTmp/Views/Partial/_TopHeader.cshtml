@@ -1,0 +1,19 @@
+﻿@model Dentist.Entities.Dto.FooterViewModel
+
+<div class="col-6 col-md-9 col-lg-8">
+    <div class="top-header-content">
+        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Adresinde Hizmetinizdeyiz"><i class="fa fa-map-marker"></i> <span>@Model.Address</span></a>
+        <a href="#" data-toggle="tooltip" data-placement="bottom" title="İletişim Numaramız"><i class="fa fa-envelope"></i> <span>@Model.Phone</span></a>
+    </div>
+</div>
+
+<!-- Top Header Social Info -->
+<div class="col-6 col-md-3 col-lg-4">
+    <div class="top-header-social-info text-right">
+        <a href="@Model.FaceIconAddress" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+        <a href="@Model.TwitterIconAddress" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+        <a href="@Model.GoogleIconAddress" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+        <a href="@Model.LinkedinIconAddress" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+        @*<a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>*@
+    </div>
+</div>

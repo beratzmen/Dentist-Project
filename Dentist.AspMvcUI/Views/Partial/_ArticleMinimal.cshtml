@@ -1,0 +1,47 @@
+﻿@model List<Dentist.Entities.Dto.ArticleUIViewModel>
+
+<!-- ***** Blog Area Start ***** -->
+<section class="dento-blog-area section-padding-100-0 clearfix">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Son Eklenen Makaleler</h2>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var article in Model)
+                {
+                    <!-- Single Blog Item -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="single-blog-item mb-100">
+                            <a href="./blog-details.html">
+                                <img src="@article.ImagePath" alt="@article.Title">
+                            </a>
+                            <!-- Blog Content -->
+                            <div class="blog-content">
+                                <a href="./blog-details.html" class="post-title">@((article.Title.Length > 30) ? article.Title.Substring(0, 30) + "..." : article.Title)</a>
+                                <p>@(Html.Raw((article.Description.Length > 35) ? article.Description.Substring(0, 35) + "..." : article.Description))</p>
+                                <div class="post-meta">
+                                    <a href="#"><i class="icon_clock_alt"></i> @article.CreatedDate.ToShortDateString()</a>
+                                    <a href="#"><i class="icon_chat_alt"></i> @article.CommentCount Yorum</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p><span>Gösterilecek makale bulunamadı.</span></p>
+            }
+        </div>
+    </div>
+</section>
+<!-- ***** Blog Area End ***** -->

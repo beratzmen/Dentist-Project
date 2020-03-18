@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Admin Panel</title>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="~/Areas/Admin/Content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/Areas/Admin/Content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/vendors/switchery/dist/switchery.min.css" rel="stylesheet" />
+
+
+
+    <!-- bootstrap-datetimepicker -->
+    <link href="~/Areas/Admin/Content/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+
+    <!-- Datatables -->
+    <link href="~/Areas/Admin/Content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Content/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Content/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!--Tinymce and Fileman-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        //var roxyFileman = '~/scripts/tinymce/plugins/fileman/index.html';
+        var roxyFileman = "/Scripts/tinymce/plugins/fileman/index.html";
+        $(document).ready(function () {
+            tinymce.init({
+                selector: "textarea",
+                theme: "modern",
+                paste_data_images: true,
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons template paste textcolor colorpicker textpattern"
+                ],
+                toolbar: "link | image",
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                toolbar2: "print preview media | forecolor backcolor emoticons",
+                image_advtab: true,
+                templates: [{
+                    title: 'Test template 1',
+                    content: 'Test 1'
+                }, {
+                    title: 'Test template 2',
+                    content: 'Test 2'
+                }],
+                file_browser_callback: RoxyFileBrowser
+            });
+        });
+        function RoxyFileBrowser(field_name, url, type, win) {
+            var cmsURL = roxyFileman;  // script URL - use an absolute path!
+            if (cmsURL.indexOf("?") < 0) {
+                cmsURL = cmsURL + "?type=" + type;
+            }
+            else {
+                cmsURL = cmsURL + "&type=" + type;
+            }
+            cmsURL += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+            tinyMCE.activeEditor.windowManager.open({
+                file: cmsURL,
+                title: 'Roxy File Browser',
+                width: 850, // Your dimensions may differ - toy around with them!
+                height: 650,
+                resizable: "yes",
+                plugins: "media",
+                inline: "yes", // This parameter only has an effect if you use the inlinepopups plugin!
+                close_previous: "no"
+            }, {
+                window: win,
+                input: field_name
+            });
+            return false;
+        }
+    </script>
+    <!--Tinymce and Fileman-->
+    <!-- Custom Theme Style -->
+    <link href="~/Areas/Admin/Content/build/css/custom.min.css" rel="stylesheet" />
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>MENU</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            @*<h3>Menu</h3>*@
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="/Admin/Home/Index"><i class="fa fa-home"></i> ANA SAYFA</a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-clone"></i>GENEL <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/Admin/About/Index">HAKKIMIZDA</a></li>
+                                        <li><a href="/Admin/Contact/Index">İLETİŞİM</a></li>
+                                        <li><a href="/Admin/WorkingHour/Index">ÇALIŞMA SAATLERİ</a></li>
+                                        <li><a href="/Admin/Statistic/Index">İSTATİSTİKLER</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Appointment/List"><i class="fa fa-clone"></i>RANDEVULAR</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Category/List"><i class="fa fa-desktop"></i> KATEGORİLER</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Job/List"><i class="fa fa-clone"></i>BRANŞLAR</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Service/List"><i class="fa fa-desktop"></i>HİZMETLER</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Article/List"><i class="fa fa-bar-chart-o"></i>BLOG</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Employee/List"><i class="fa fa-clone"></i>KADROMUZ</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/Bulletin/List"><i class="fa fa-clone"></i>ABONELER</a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/ContactMail/List"><i class="fa fa-clone"></i>İLETİŞİMDEN GELEN MAİLLER</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <!--
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/Content/image/bg-img/12.jpg" alt="">John Doe
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="~/Content/image/bg-img/12.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="~/Content/image/bg-img/12.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="~/Content/image/bg-img/12.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="~/Content/image/bg-img/12.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        --->
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    @*Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>*@
+                    Dentist Automation Systems
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+
+    <!-- jQuery -->
+    <script src="~/Areas/Admin/Content/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Areas/Admin/Content/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/Areas/Admin/Content/vendors/switchery/dist/switchery.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="~/Areas/Admin/Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Content/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Areas/Admin/Content/vendors/moment/min/moment.min.js"></script>
+    <!-- bootstrap-datetimepicker -->
+    <script src="~/Areas/Admin/Content/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- jquery.inputmask -->
+    <script src="~/Areas/Admin/Content/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/Areas/Admin/Content/build/js/custom.min.js"></script>
+
+    <!-- PROJECT -->
+    <script src="~/Areas/Admin/Script/MainProject.js"></script>
+    <!-- PROJECT -->
+    <!-- Initialize datetimepicker -->
+    <script>
+
+        $('#myDatepicker3').datetimepicker({
+            format: 'HH:mm'
+        });
+        $('#myDatepicker4').datetimepicker({
+            format: 'HH:mm'
+        });
+
+    </script>
+</body>
+</html>

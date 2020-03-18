@@ -1,0 +1,26 @@
+﻿@model List<Dentist.Entities.Dto.ArticleUIViewModel>
+
+<!-- Single Widget Area -->
+<div class="single-widget-area news-widget">
+    <h5 class="widget-title">En Çok Okunanlar</h5>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <!-- Single News Area -->
+            <div class="single-news-area d-flex align-items-center">
+                <div class="blog-thumbnail">
+                    <img src="@item.ImagePath" alt="@item.Title">
+                </div>
+                <div class="blog-content">
+                    <a href="/Blog/Detail/@item.Id" class="post-title">@item.Title</a>
+                    <span class="post-date">@item.CreatedDate.ToShortDateString()</span>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <span>Gösterilecek makale bulunamadı.</span>
+    }
+</div>

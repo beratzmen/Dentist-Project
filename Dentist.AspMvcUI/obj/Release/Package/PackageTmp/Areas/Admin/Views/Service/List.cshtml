@@ -1,0 +1,96 @@
+﻿@model List<Dentist.Entities.Dto.ServiceViewModel>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal" style="font-weight:bold;">Silmeyi Onaylıyor musunuz ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center" style="font-weight:bold;" id="contentModal">
+                <p style="color:black">Kategori İsmi : <span id="spanCategoryName" style="color:brown"></span></p>
+                <p style="color:black">Başlık : <span id="spanTitle" style="color:brown"></span></p>
+                <p style="color:black">Periyot : <span id="spanPeriod" style="color:brown"></span></p>
+                <p style="color:black">Fiyat : <span id="spanPrice" style="color:brown"></span></p>
+
+            </div>
+            <div class="modal-footer">
+                <button id="DelService" type="button" class="btn btn-secondary" data-dismiss="modal">Sil</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="/Admin/Service/Add" type="button" class="btn btn-round btn-success col-md-12 col-sm-12 col-xs-12" style="display:inline-grid">Yeni Hizmet Ekle</a>
+<div class="x_content">
+    @if (Model == null || Model.Count <= 0)
+    {
+        <span>Gösterilecek fiyatlandırma bilgisi bulunamadı.</span>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Kategori İsmi</th>
+                        <th>Hizmet Adı</th>
+                        <th>Açıklama</th>
+                        <th>Periyot</th>
+                        <th>Fiyat</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CategoryName</td>
+                            <td>@item.Title</td>
+                            <td>@Html.Raw(item.Description.Substring(0, 10))  ...</td>
+                            <td>@item.Period</td>
+                            <td>@item.Price  <span class="fa fa-turkish-lira" aria-hidden="true"></span></td>
+                            <td>
+                                <a href="/Admin/Service/Update/@item.Id" class="btn btn-round btn-warning">Güncelle</a>
+                            </td>
+                            <td>
+                                <button onclick="DeleteService(@item.Id,'@item.CategoryName','@item.Title','@item.Period','@item.Price')" class="btn btn-round btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Sil</button>
+                                @*<a href="/Admin/Service/Delete/@item.Id" class="btn btn-round btn-danger">Sil</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<script>
+    var _id;
+    function DeleteService(id, categoryName, title, period, price) {
+        window._id = id;
+        //document.getElementById("pId").innerHTML = fullName + " isimli kullanıcıdan";
+        document.getElementById("spanCategoryName").innerHTML = categoryName;
+        document.getElementById("spanTitle").innerHTML = title;
+        document.getElementById("spanPeriod").innerHTML = period;
+        document.getElementById("spanPrice").innerHTML = price;
+    }
+    $("#DelService").click(function () {
+        $.ajax({
+            url: '/Admin/Service/Delete/',
+            type: 'POST',
+            data: { id: _id },
+            success: function (response) {
+                window.location.href = '/Admin/Service/List/';
+            }
+        });
+    });
+</script>

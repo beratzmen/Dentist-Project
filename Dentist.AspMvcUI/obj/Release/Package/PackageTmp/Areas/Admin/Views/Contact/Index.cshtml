@@ -1,0 +1,149 @@
+﻿@model Dentist.Entities.Model.Global
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>İletişim Bilgileri <small>@Dentist.AspMvcUI.Utility.Util.StaticVariables.RequiredField</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="demo-form2" data-parsley-validate method="post" action="/Admin/Contact/Index" class="form-horizontal form-label-left">
+                    @Html.AntiForgeryToken()
+                    <input name="Id" value="@((Model == null) ? 0 : Model.Id)" type="hidden" />
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Adres :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="Address" value="@((Model == null) ? string.Empty : Model.Address)" required="required" class="form-control" placeholder="Adres">
+                            <span class="fa fa-map-marker form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Telefon :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="Phone" value="@((Model == null) ? string.Empty : Model.Phone)" required="required" class="form-control" placeholder="Phone" data-inputmask="'mask' : '(999) 999-9999'">
+                            <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            EMail :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="Email" value="@((Model == null) ? string.Empty : Model.Email)" required="required" class="form-control" placeholder="Email">
+                            <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Fax :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="Fax" value="@((Model == null) ? string.Empty : Model.Fax)" class="form-control" placeholder="Fax">
+                            <span class="fa fa-fax form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Facebook Adresi :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="FaceAddress" value="@((Model == null) ? string.Empty : Model.FaceAddress)" class="form-control" placeholder="https://www.facebookadresi.com/" data-toggle="tooltip" data-placement="bottom" title="https://adres.com Şeklinde Tam Adres Girilmelidir">
+                            <span class="fa fa-facebook form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Twitter Adresi :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="TwitterAddress" value="@((Model == null) ? string.Empty : Model.TwitterAddress)" class="form-control" placeholder="https://www.twitteradresi.com/" data-toggle="tooltip" data-placement="bottom" title="https://adres.com Şeklinde Tam Adres Girilmelidir">
+                            <span class="fa fa-twitter form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            GooglePlus Adresi :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="GoogleAddress" value="@((Model == null) ? string.Empty : Model.GoogleAddress)" class="form-control" placeholder="https://www.googleplusadresi.com/" data-toggle="tooltip" data-placement="bottom" title="https://adres.com Şeklinde Tam Adres Girilmelidir">
+                            <span class="fa fa-google-plus form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Linkedin Adresi :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input  type="text" name="LinkedinAddress" value="@((Model == null) ? string.Empty : Model.LinkedinAddress)" class="form-control" placeholder="https://www.linkedinadresi.com/" data-toggle="tooltip" data-placement="bottom" title="https://adres.com Şeklinde Tam Adres Girilmelidir">
+                            <span class="fa fa-linkedin form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="display:inline-grid">
+                            <button type="submit" class="btn btn-success">KAYDET</button>
+                        </div>
+                    </div>
+                </form>
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @*<input id="txtSearch" type="text" class="form-control" style="width:180px; margin-bottom:15px;" placeholder="Ara" aria-describedby="basic-addon1">*@
+                                    Adres
+                                </th>
+                                <th>Telefon</th>
+                                <th>Mail</th>
+                                <th>Facebook Adresi</th>
+                                <th>Twitter Adresi</th>
+                                <th>Linkedin Adresi</th>
+                                <th>GooglePlus Adresi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@((Model == null) ? string.Empty : Model.Address)</td>
+                                <td>@((Model == null) ? string.Empty : Model.Phone)</td>
+                                <td>@((Model == null) ? string.Empty : Model.Email)</td>
+                                <td>@((Model == null) ? string.Empty : Model.FaceAddress)</td>
+                                <td>@((Model == null) ? string.Empty : Model.TwitterAddress)</td>
+                                <td>@((Model == null) ? string.Empty : Model.LinkedinAddress)</td>
+                                <td>@((Model == null) ? string.Empty : Model.GoogleAddress)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

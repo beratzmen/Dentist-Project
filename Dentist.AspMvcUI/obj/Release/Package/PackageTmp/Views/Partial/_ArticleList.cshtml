@@ -1,0 +1,85 @@
+﻿@model Dentist.Entities.Dto.ArticleBlock
+@{
+    int currentPage = this.ViewData.ContainsKey("currentPage") ? (int)this.ViewData["currentPage"] : 1;
+    int categoryId = (this.ViewData.ContainsKey("categoryId") && this.ViewData["categoryId"] != null) ? (int)this.ViewData["categoryId"] : 1;
+    Dentist.AspMvcUI.Models.Enum.ArticlePagingType pagingType = this.ViewData.ContainsKey("pagingType") ? (Dentist.AspMvcUI.Models.Enum.ArticlePagingType)this.ViewData["pagingType"] : Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Index;
+}
+
+
+
+@if (Model.ArticleList != null && Model.ArticleList.Count > 0)
+{
+    foreach (var item in Model.ArticleList)
+    {
+        <!-- Single Blog Item -->
+        <div class="single-blog-item style-2 d-flex flex-wrap align-items-center mb-50">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <a href="/Blog/Detail/@item.Id">
+                    <img style="width:350px;height:250px;" src="@item.ImagePath" alt="">
+                </a>
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="/Blog/Detail/@item.Id" class="post-title">@item.Title</a>
+                <p>@Html.Raw(item.Description.Length > 20 ? item.Description.Substring(0, 20) + "..." : item.Description)   <span>..</span></p>
+                <div class="post-meta">
+                    <a><i class="icon_clock_alt"></i> @item.CreatedDate.ToShortDateString()</a>
+                    <a><i class="icon_chat_alt"></i> @item.CommentCount YORUM</a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="single-blog-item style-2 d-flex flex-wrap align-items-center mb-50">
+        <!-- Blog Content -->
+        <div class="blog-content">
+            <p>Gösterilecek makale bulunamadı.</p>
+        </div>
+    </div>
+}
+<!-- Pagination -->
+<nav class="dento-pagination mb-100">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            @*<li class="page-item @((currentPage == i) ? "active": string.Empty)"><a class="page-link" @((fromIndex) ? "href=/Blog/Index/" + @i : "onclick=SearchArticle(" + i + ")")>@i</a></li>*@
+            switch (pagingType)
+            {
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Index:
+                    <li class="page-item @((currentPage == i) ? "active": string.Empty)"><a class="page-link" href="/Blog/Index/@i">@i</a></li>
+                    break;
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Search:
+                    <li class="page-item @((currentPage == i) ? "active": string.Empty)"><a class="page-link" onclick="SearchArticle(@i)">@i</a></li>
+                    break;
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Category:
+                    <li class="page-item @((currentPage == i) ? "active": string.Empty)"><a class="page-link" onclick="GetByCategoryId(@i,@categoryId)">@i</a></li>
+                    break;
+                default:
+                    <li class="page-item @((currentPage == i) ? "active": string.Empty)"><a class="page-link" href="/Blog/Index/@i">@i</a></li>
+                    break;
+            }
+        }
+        @if (currentPage < Model.PageCount)
+        {
+            switch (pagingType)
+            {
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Index:
+                    <li class="page-item"><a class="page-link" href="/Blog/Index/@(currentPage + 1)"><i class="fa fa-angle-right"></i></a></li>
+                    break;
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Search:
+                    <li class="page-item"><a class="page-link" onclick="SearchArticle(@(currentPage + 1))"><i class="fa fa-angle-right"></i></a></li>
+                    break;
+                case Dentist.AspMvcUI.Models.Enum.ArticlePagingType.Category:
+                    <li class="page-item"><a class="page-link" onclick="GetByCategoryId(@(currentPage + 1),@categoryId)"><i class="fa fa-angle-right"></i></a></li>
+                    break;
+                default:
+                    <li class="page-item"><a class="page-link" href="/Blog/Index/@(currentPage + 1)"><i class="fa fa-angle-right"></i></a></li>
+                    break;
+            }
+            @*<li class="page-item"><a class="page-link" @((fromIndex) ? "href=/Blog/Index/" + (currentPage + 1) : "onclick=SearchArticle(" + (currentPage + 1) + ")")><i class="fa fa-angle-right"></i></a></li>*@
+        }
+    </ul>
+</nav>

@@ -1,0 +1,8 @@
+﻿@model List<Dentist.Entities.Dto.CommentUIViewModel>
+
+@foreach (var comm in Model)
+{
+    <ol class="children">
+        @Html.Partial("~/Views/Partial/_CommentArea.cshtml", comm)
+    </ol>
+}

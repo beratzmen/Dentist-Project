@@ -1,0 +1,164 @@
+﻿@model List<Dentist.Entities.Model.Appointment>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h3>Randevu İsteklerinin Listesi</h3>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal" style="font-weight:bold;">Randevu Detayı</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center" style="font-weight:bold;" id="contentModal">
+                <p style="color:black">İsim Soyisim : <span id="spanFullName" style="color:brown"></span></p>
+                <p style="color:black">Telefon : <span id="spanPhone" style="color:brown"></span></p>
+                <p style="color:black">Email : <span id="spanEmail" style="color:brown"></span></p>
+                <p style="color:black">Tarih : <span id="spanDate" style="color:brown"></span></p>
+                <p style="color:black">Mesaj : <span id="spanMessage" style="color:brown"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button id="DeleteClick" type="button" class="btn btn-secondary" data-dismiss="modal">Sil</button>
+                <button id="unreadClick" type="button" class="btn btn-secondary" data-dismiss="modal">Okunmadı İşaretle</button>
+                <button id="readClick" type="button" class="btn btn-secondary" data-dismiss="modal">Okundu İşaretle</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal" style="font-weight:bold;"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="msgModal"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button id="unreadClick" type="button" class="btn btn-secondary" data-dismiss="modal">Okunmadı İşaretle</button>
+                <button id="readClick" type="button" class="btn btn-secondary" data-dismiss="modal">Okundu İşaretle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="x_content">
+    @if (Model == null)
+    {
+        <h2>Randevu bulunmamaktadır.</h2>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>İsim Soyisim</th>
+                        <th>Telefon</th>
+                        <th>Email</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th>Mesaj</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FullName</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreatedDate</td>
+                            @if (item.Status == 0)
+                            {
+                                <td><span class="label label-info">Okunmadı</span></td>
+                            }
+                            else
+                            {
+                                <td><span class="label label-success">Okundu</span></td>
+                            }
+                            <td>@((item.Message.Length < 10) ? item.Message : item.Message.Substring(0, 10)) <span style="color:black;font-size:25px;">..</span></td>
+                            <td>
+                                <button onclick="AppointmentRead(@item.Id,'@item.FullName','@item.Phone','@item.CreatedDate','@item.Message','@item.Email')" class="btn btn-round btn-warning" data-toggle="modal" data-target="#exampleModalCenter">Gör</button>
+                            </td>
+                            <td>
+                                <button onclick="AppointmentDelete(@item.Id,'@item.FullName','@item.Phone','@item.CreatedDate','@item.Message','@item.Email')" class="btn btn-round btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Sil</button>
+                                @*<a href="/Admin/Appointment/Delete/@item.Id" class="btn btn-round btn-danger">Sil</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<script>
+    var _id;
+    function AppointmentRead(id, fullName, phone, date, message, mail) {
+        window._id = id;
+        //document.getElementById("pId").innerHTML = fullName + " isimli kullanıcıdan";
+        document.getElementById("spanFullName").innerHTML = fullName;
+        document.getElementById("spanPhone").innerHTML = phone;
+        document.getElementById("spanEmail").innerHTML = mail;
+        document.getElementById("spanDate").innerHTML = date;
+        document.getElementById("spanMessage").innerHTML = message;
+    }
+    function AppointmentDelete(id, fullName, phone, date, message, mail) {
+        window._id = id;
+        //document.getElementById("pId").innerHTML = fullName + " isimli kullanıcıdan";
+        document.getElementById("titleModal").innerHTML = "Silmeyi Onaylıyor Musunuz ?";
+        document.getElementById("spanFullName").innerHTML = fullName;
+        document.getElementById("spanPhone").innerHTML = phone;
+        document.getElementById("spanEmail").innerHTML = mail;
+        document.getElementById("spanDate").innerHTML = date;
+        document.getElementById("spanMessage").innerHTML = message;
+    }
+    $("#readClick").click(function () {
+        $.ajax({
+            url: '/Admin/Appointment/AppointmentRead/',
+            type: 'POST',
+            data: { id: _id, status: 1 },
+            success: function (response) {
+                window.location.href = '/Admin/Appointment/List/';
+            }
+        });
+    });
+
+    $("#unreadClick").click(function () {
+        $.ajax({
+            url: '/Admin/Appointment/AppointmentRead/',
+            type: 'POST',
+            data: { id: _id, status: 0 },
+            success: function (response) {
+                window.location.href = '/Admin/Appointment/List/';
+            }
+        });
+    });
+
+    $("#DeleteClick").click(function () {
+        $.ajax({
+            url: '/Admin/Appointment/Delete/',
+            type: 'POST',
+            data: { id: _id },
+            success: function (response) {
+                window.location.href = '/Admin/Appointment/List/';
+            }
+        });
+    });
+
+
+</script>

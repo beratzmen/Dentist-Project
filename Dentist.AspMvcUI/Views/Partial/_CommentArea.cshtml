@@ -1,0 +1,21 @@
+﻿@model Dentist.Entities.Dto.CommentUIViewModel
+
+<li class="single_comment_area">
+    <!-- Comment Content -->
+    <div class="comment-content d-flex">
+        <!-- Comment Author -->
+        @*<div class="comment-author">
+                <img src="../../Content/image/bg-img/26.jpg" alt="author">
+            </div>*@
+        <!-- Comment Meta -->
+        <div class="comment-meta">
+            <a href="#" class="post-author">@Model.FullName / <span>@Model.CreatedDate.ToShortDateString()</span></a>
+            <p>@Model.Description</p>
+            <a onclick="commentScrollToBottom(@Model.Id, '@Model.FullName');" class="comment-reply">Cevapla</a>
+        </div>
+    </div>
+    @if (Model.Comments != null)
+    {
+        @Html.Partial("~/Views/Partial/_CommentSubView.cshtml", Model.Comments)
+    }
+</li>

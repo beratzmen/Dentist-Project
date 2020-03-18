@@ -1,0 +1,75 @@
+﻿@model List<Dentist.Entities.Model.Bulletin>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal" style="font-weight:bold;">Silmeyi Onaylıyor musunuz ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center" style="font-weight:bold;" id="contentModal">
+                <p style="color:black">Mail : <span id="spanEmail" style="color:brown"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button id="DelBulletin" type="button" class="btn btn-secondary" data-dismiss="modal">Sil</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="x_content">
+    @if (Model == null)
+    {
+        <h2>Kayıtlı abone bulunamadı.</h2>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Email</td>
+                            <td>
+                                <button onclick="DeleteBulletin(@item.Id,'@item.Email')" class="btn btn-round btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Sil</button>
+                                @*<a href="/Admin/Bulletin/Delete/@item.Id" class="btn btn-round btn-danger">Sil</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<script>
+    var _id;
+    function DeleteBulletin(id, mail) {
+        window._id = id;
+        document.getElementById("spanEmail").innerHTML = mail;
+    }
+    $("#DelBulletin").click(function () {
+        $.ajax({
+            url: '/Admin/Bulletin/Delete/',
+            type: 'POST',
+            data: { id: _id },
+            success: function (response) {
+                window.location.href = '/Admin/Bulletin/List/';
+            }
+        });
+    });
+</script>

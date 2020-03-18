@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Dento - Dentist &amp; Medical HTML Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <!-- Title -->
+    <title>Dento - Dentist &amp; Medical HTML Template</title>
+    <!-- Favicon -->
+    <link rel="icon" href="~/Content/image/core-img/favicon.ico" />
+
+    <!-- Core Stylesheet -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preload-content">
+            <div id="dento-load"></div>
+        </div>
+    </div>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <!-- Top Content -->
+                    @Html.Action("_TopHeader", "Partial")                    
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Top Header End -->
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="dentoNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="/home/index"><img src="~/Content/image/core-img/logo.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul id="nav">
+                                    <li><a href="/Home/Index">ANA SAYFA</a></li>
+                                    <li><a href="/About/Index">HAKKIMIZDA</a></li>
+                                    <li><a href="/Service/Index">HİZMETLERİMİZ</a></li>
+                                    <li><a href="/Pricing/Index">FİYATLARIMIZ</a></li>
+                                    <li><a href="/Blog/Index">BLOG</a></li>
+                                    <li><a href="/Contact/Index/">İLETİŞİM</a></li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+
+                        <!-- Booking Now Button -->
+                        <a href="/Home/Index/#appointmentForm" class="btn dento-btn booking-btn">Randevu Al</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+    @RenderBody()
+    @Html.Action("_Footer", "Partial")
+
+
+    <!-- OTOMATİK GELDİ   -->
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <!-- OTOMATİK GELDİ   -->
+    <!-- ******* All JS ******* -->
+    <!-- jQuery js -->
+    <script src="~/Content/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/Content/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <!-- All js -->
+    <script src="~/Content/js/dento.bundle.js"></script>
+    <!-- Active js -->
+    <script src="~/Content/js/default-assets/active.js"></script>
+
+    <script src="~/Scripts/MainProject.js"></script>
+</body>
+</html>

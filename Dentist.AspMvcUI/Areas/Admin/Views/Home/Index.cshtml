@@ -1,0 +1,62 @@
+﻿@model Dentist.Entities.Model.Global
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ana Sayfa Düzeni</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-group">
+                    <h4 class="col-form-label">Ana sayfada görünmesini istediğiniz alanları seçebilirsiniz.</h4>
+                    <form data-parsley-validate method="post" action="/Admin/Home/Update" class="form-horizontal form-label-left">
+                        @Html.AntiForgeryToken()
+                        <input name="Id" type="hidden" value="@Model.Id" />
+                        <input name="TableType" type="hidden" value="@((short)Dentist.Entities.Enum.Database.TableType.Home)" />
+                        <input id="hdnHomeSwitch" name="AreaType" type="hidden" value="@Model.AreaType" />
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="titleId">
+                                Başlık :  <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" value="@Model.Title" id="titleId" required="required" name="Title" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descriptionId">
+                                Açıklama :
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" value="@Model.Description" id="descriptionId" name="Description" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        @foreach (Dentist.Entities.Enum.Database.AreaType item in Enum.GetValues(typeof(Dentist.Entities.Enum.Database.AreaType)).OfType<Enum>().Take(8))
+                        {
+                            <div>
+                                <label>
+                                    <input type="checkbox" class="js-switch homePageSwitch" @((Dentist.Business.Help.Util.FindEnumInString(item, Model.AreaType)) ? "checked" : "") enumNumber="@(((short)item).ToString())" /> @Dentist.Business.Help.Util.GetEnumDescription(item)
+                                </label>
+                            </div>
+                        }
+                        <br />
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

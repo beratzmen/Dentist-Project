@@ -1,0 +1,67 @@
+﻿@model Dentist.Entities.Dto.ServiceUIViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ***** Breadcrumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-gradient-overlay" style="background-image: url(../../Content/image/bg-img/12.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <h2 class="title">HİZMETLERİMİZ</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="breadcumb--con">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index"><i class="fa fa-home"></i> Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hizmetlerimiz</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Breadcrumb Area End ***** -->
+<!-- ***** Services Area Start ***** -->
+<section class="dento-services-area mt-50 mb-50">
+    <div class="container">
+        <div class="row">
+            @if (Model != null && Model.ServiceList != null && Model.ServiceList.Count > 0)
+            {
+                foreach (var service in Model.ServiceList)
+                {
+                    <!-- Single Service Area -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-service--area text-center mb-50">
+                            @*<div class="icon--">
+                                    <img src="../../Content/image/project/core-img/s6.png" alt="">
+                                </div>*@
+                            <h5>@service.Title</h5>
+                            <p>@Html.Raw(service.Description)</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-service--area text-center mb-50">
+                        <p>Gösterilecek hizmet bilgisi bulunamadı.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- ***** Services Area End ***** -->
+
+@Html.Partial("~/Views/Partial/_Client.cshtml")
+
+@Html.Partial("~/Views/Partial/_ArticleMinimal.cshtml", Model.ArticleList)

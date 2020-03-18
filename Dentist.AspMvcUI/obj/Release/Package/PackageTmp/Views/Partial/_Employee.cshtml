@@ -1,0 +1,43 @@
+﻿@model List<Dentist.Entities.Dto.EmployeeUIViewModel>
+
+<!-- ***** Dento Dentist Area Start ***** -->
+<section class="dentist-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Uzman Kadromuz</h2>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var employee in Model)
+            {
+                <!-- Single Dentist Area -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="single-dentist-area mb-100">
+                        <img src="@employee.ImagePath" alt="@employee.JobName @employee.FullName">
+                        <!-- Dentist Content -->
+                        <div class="dentist-content">
+                            <!-- Social Info -->
+                            @*<div class="dentist-social-info">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </div>*@
+                            <!-- Dentist Info -->
+                            <div class="dentist-info bg-gradient-overlay">
+                                <h5>@employee.FullName</h5>
+                                <p>@employee.JobName</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- ***** Dento Dentist Area End ***** -->

@@ -1,0 +1,139 @@
+﻿@model Dentist.Entities.Model.Global
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Sayısal Veriler <small>@Dentist.AspMvcUI.Utility.Util.StaticVariables.RequiredField</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form data-parsley-validate method="post" action="/Admin/Statistic/Index" class="form-horizontal form-label-left">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@((Model == null)? 0 : Model.Id)" name="Id" />
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Kuruluş Tarihi :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number" name="Since" value="@((Model == null)? 0 : Model.Since)" class="form-control" placeholder="Kuruluş Tarihi">
+                            <span class="fa fa-copyright form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Hasta Sayısı :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number" name="Patient" value="@((Model == null)? 0 : Model.Patient)" class="form-control" placeholder="Hasta Sayısı">
+                            <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Sertifika Sayısı :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number" name="Certificate" value="@((Model == null)? 0 : Model.Certificate)" class="form-control" placeholder="Sertifika Sayısı">
+                            <span class="fa fa-check-circle form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Doktor :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number" name="Doctor" value="@((Model == null)? 0 : Model.Doctor)" class="form-control" placeholder="Doktor Sayısı">
+                            <span class="fa fa-stethoscope form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Tecrübe Yüzdesi(%):  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number"  name="Experience" value="@((Model == null)? 0 : Model.Experience)" class="form-control" placeholder="Tecrübe Yılı">
+                            <span class="fa fa-graduation-cap form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Ekipman Yüzdesi(%):  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number"  name="ModernEquipment" value="@((Model == null)? 0 : Model.ModernEquipment)" class="form-control" placeholder="Ekipman Sayısı">
+                            <span class="fa fa-cutlery form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Memnuniyet Yüzdesi(%):  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="number"  name="Sincerity" value="@((Model == null)? 0 : Model.Sincerity)" class="form-control" placeholder="Memnun Kalan Kişi Sayısı">
+                            <span class="fa fa-smile-o form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="display:inline-grid">
+                            <button type="submit" class="btn btn-success">KAYDET</button>
+                        </div>
+                    </div>
+
+                </form>
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Kuruluş Tarihi</th>
+                                <th>Hasta Sayısı</th>
+                                <th>Sertifika Sayısı</th>
+                                <th>Doktor Sayısı</th>
+                                <th>Tecrübe</th>
+                                <th>Ekipman</th>
+                                <th>Memnuniyet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @if (Model != null)
+                                {
+                                    <td>@Model.Since</td>
+                                    <td>@Model.Patient</td>
+                                    <td>@Model.Certificate</td>
+                                    <td>@Model.Doctor</td>
+                                    <td>@Model.Experience</td>
+                                    <td>@Model.ModernEquipment</td>
+                                    <td>@Model.Sincerity</td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

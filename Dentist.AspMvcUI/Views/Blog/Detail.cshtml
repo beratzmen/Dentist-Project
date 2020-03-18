@@ -1,0 +1,113 @@
+﻿@model Dentist.Entities.Dto.BlogDetailViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ***** Breadcrumb Area Start ***** -->
+<div class="breadcumb-area bg-img bg-gradient-overlay" style="background-image: url(../../Content/image/bg-img/12.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <h2 class="title">Blog Detay</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="breadcumb--con">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blog Detay</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Breadcrumb Area End ***** -->
+<!-- ****** Blog Area Start ******* -->
+<section class="dento--blog-area mt-50">
+    <div class="container">
+        <div class="row">
+            @if (Model != null && Model.Article != null)
+            {
+                <div class="col-12 col-lg-8 mb-100">
+                    <!-- Blog Details Area -->
+                    <div class="blog-details-area">
+                        <img src="@Model.Article.ImagePath" alt="">
+
+                        <h2 class="post-title">@Model.Article.Title</h2>
+                        <div class="post-meta">
+                            <a href="#"><i class="icon_clock_alt"></i> @Model.Article.CreatedDate</a>
+                            <a href="#"><i class="icon_chat_alt"></i> @Model.Article.CommentCount YORUM</a>
+                        </div>
+
+                        <p>  @Html.Raw(Model.Article.Description) </p>
+                    </div>
+
+                    <!-- Post Share  -->
+                    @*<div class="post-share-area mb-30">
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i> Share</a>
+                            <a href="#" class="tweet"><i class="fa fa-twitter"></i> Tweet</a>
+                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i> Share</a>
+                            <a href="#" class="pinterest"><i class="fa fa-pinterest"></i> Share</a>
+                        </div>*@
+
+                    <!-- Comments Area -->
+                    <div class="comment_area clearfix">
+                        <h5 class="title">@Model.Article.CommentCount Yorum</h5>
+                        <ol>
+                            <!-- Single Comment Area -->
+                            @foreach (var comm in Model.Article.Comments)
+                            {
+                                @Html.Partial("~/Views/Partial/_CommentArea.cshtml", comm)
+                            }
+                        </ol>
+                    </div>
+                    <!-- Leave A Reply -->
+                    <div id="divComment" class="contact-form mt-30">
+                        <h5 class="mb-30">Bir Yorum Yazın</h5>
+                        <div id="divReplyStatus" style="display:none;" class="alert alert-info" role="alert">
+                            Yorumuna cevap verdiğiniz kişi: <i id="lblReplyFullName" style="text-decoration:underline;"></i>
+                            <button type="button" onclick="clearReplyValue();" style="margin-left:10px;" class="btn btn-info">iptal</button>
+                        </div>
+                        <!-- Form -->
+                        <form data-parsley-validate method="post" action="/Blog/CommentAdd" enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <input type="hidden" name="UserId" value="-1" />
+                                <input type="hidden" name="ArticleId" value="@Model.Article.Id" />
+                                <input type="hidden" id="hdnReplyId" name="ReplyId" />
+                                <div class="col-lg-6">
+                                    <input type="text" name="FullName" maxlength="100" class="form-control mb-30" placeholder="Adınız ve Soyadınız" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="email" name="Email" maxlength="100" class="form-control mb-30" placeholder="Email Adresiniz" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="Description" class="form-control mb-30" placeholder="Yorumunuz" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn dento-btn">Gönder</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            }
+
+            <!-- Dento Sidebar Area -->
+            <div class="col-12 col-lg-4">
+                <div class="dento-sidebar">
+                    @Html.Partial("~/Views/Partial/_ArticleMinimalVertical.cshtml", Model.LastAddedArticleList)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ****** Blog Area End ******* -->

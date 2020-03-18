@@ -1,0 +1,107 @@
+﻿@model Dentist.Entities.Dto.FooterViewModel
+
+<!-- ***** Footer Area Start ***** -->
+<footer class="footer-area bg-img bg-gradient-overlay" style="background-image: url(../../Content/image/bg-img/3.jpg);">
+    <div class="container">
+        <div class="row">
+            <!-- Single Footer Widget -->
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-footer-widget">
+                    <a href="./index.html" class="d-block mb-4"><img src="~/Content/image/core-img/logo.png" alt=""></a>
+                    <p>Detaylı bilgi için aşağıdaki adresten bize ulaşabilirsiniz</p>
+                    <div class="footer-contact">
+                        @if (Model != null && Model.contactModel != null)
+                        {
+                            foreach (var item in Model.contactModel)
+                            {
+                                <p><i class="icon_pin"></i>@item.Address</p>
+                                <p><i class="icon_phone"></i>@item.Phone</p>
+                                <p><i class="icon_mail"></i>@item.Email</p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Footer Widget -->
+            <div class="col-12 col-sm-6 col-lg">
+                <div class="single-footer-widget">
+                    <!-- Widget Title -->
+                    <h5 class="widget-title">Çalışma Saatlerimiz</h5>
+                    <!-- Opening Hours -->
+                    <ul class="opening-hours">
+                        @if (Model != null && Model.workingHourModel != null)
+                        {
+                            foreach (var item in Model.workingHourModel)
+                            {
+                                <li><span>@item.Day</span> <span>@item.StartTime.Value.ToString(@"hh\:mm") - @item.EndTime.Value.ToString(@"hh\:mm")</span></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Single Footer Widget -->
+            <div class="col-12 col-sm-6 col-lg">
+                <div class="single-footer-widget">
+                    <!-- Widget Title -->
+                    <h5 class="widget-title">Hızlı Erişim</h5>
+
+                    <!-- Quick Links Nav -->
+                    <nav>
+                        <ul class="quick-links">
+                            <li><a href="/Home/Index">Ana Sayfa</a></li>
+                            <li><a href="/About/Index">Hakkımızda</a></li>
+                            <li><a href="/Service/Index">Hizmetlerimiz</a></li>
+                            <li><a href="/Pricing/Index">Fiyatlarımız</a></li>
+                            <li><a href="/Blog/Index">Blog</a></li>
+                            <li><a href="/Contact/Index">İletişim</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Single Footer Widget -->
+            <div class="col-12 col-sm-6 col-lg">
+                <div class="single-footer-widget">
+                    <!-- Widget Title -->
+                    <h5 class="widget-title">Bülten</h5>
+
+                    <p>Son gelişmelerden haberdar olmak için abone olun</p>
+                    <!-- Newsletter Form -->
+                    <div class="footer-newsletter-form">
+                        <form action="/Partial/Add" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="email" name="Email" value="" placeholder="Email Adresi Girin" required="required">
+                            <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- Social Info -->
+                    <div class="footer-social-info">
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copywrite Area -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="copywrite-content">
+                    <p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ***** Footer Area End ***** -->

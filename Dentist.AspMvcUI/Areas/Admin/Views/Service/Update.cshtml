@@ -1,0 +1,91 @@
+﻿@model Dentist.Entities.Dto.ServiceViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Hizmet Güncelleme Sayfası <small>@Dentist.AspMvcUI.Utility.Util.StaticVariables.RequiredField</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form id="demo-form2" data-parsley-validate method="post" action="/Admin/Service/Update" class="form-horizontal form-label-left">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Model.Id" name="Id" />
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="titleId">
+                            Başlık :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" required="required" name="Title" value="@Model.Title" class="form-control col-md-7 col-xs-12">
+                            <span class="fa fa-bookmark form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descriptionId">
+                            Açıklama :
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="titleId">
+                            Periyot :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" required="required" name="Period" value="@Model.Period" class="form-control col-md-7 col-xs-12">
+                            <span class="fa fa-check-square form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="titleId">
+                            Fiyat :  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" required="required" name="Price" value="@Model.Price" class="form-control col-md-7 col-xs-12">
+                            <span class="fa fa-turkish-lira form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Hizmet Türü</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control" name="CategoryId">
+                                @foreach (var item in Model.CategoryList)
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="display:inline-grid">
+                            <button type="submit" class="btn btn-success">KAYDET</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

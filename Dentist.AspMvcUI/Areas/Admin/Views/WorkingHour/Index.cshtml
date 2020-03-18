@@ -1,0 +1,155 @@
+﻿@model List<Dentist.Entities.Model.Global>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal" style="font-weight:bold;">Silmeyi Onaylıyor Musunuz ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center" style="font-weight:bold;" id="contentModal">
+                <p style="color:black">Gün : <span id="spanDay" style="color:brown"></span></p>
+                <p style="color:black">Açılış Saati : <span id="spanStartTime" style="color:brown"></span></p>
+                <p style="color:black">Kapanış Saati : <span id="spanEndTime" style="color:brown"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button id="DelWorkingHour" type="button" class="btn btn-secondary" data-dismiss="modal">Sil</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Çalışma Saatleri<small>@Dentist.AspMvcUI.Utility.Util.StaticVariables.RequiredField</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <form data-parsley-validate method="post" action="/Admin/WorkingHour/Index" class="form-horizontal form-label-left">
+                    @Html.AntiForgeryToken()
+                    @*<input type="hidden" value="@Model.Id" name="Id" />*@
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Gün Adı :  <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" name="Day" class="form-control" placeholder="Gün Adı">
+                            <span class="fa fa-pencil form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Açılış Saati :  <span class="required"></span>
+                        </label>
+                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                            <div class="form-group">
+                                <div class='input-group date' id='myDatepicker3'>
+                                    <input type='time' name="StartTime" placeholder="Açılış Saatini Giriniz" class="form-control input-group-addon" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Kapanış Saati:  <span class="required"></span>
+                        </label>
+                        <div class='col-md-6 col-sm-6 col-xs-12'>
+                            <div class="form-group">
+                                <div class='input-group date' id='myDatepicker4'>
+                                    <input type='time' name="EndTime" placeholder="Kapanış Saatini Giriniz" class="form-control input-group-addon" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="display:inline-grid">
+                            <button type="submit" class="btn btn-success">KAYDET</button>
+                        </div>
+                    </div>
+
+                </form>
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Gün</th>
+                                <th>Açılış</th>
+                                <th>Kapanış</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Day</td>
+                                        <td>@item.StartTime</td>
+                                        <td>@item.EndTime</td>
+                                        <td>
+                                            <a href="/Admin/WorkingHour/Update/@item.Id" class="btn btn-round btn-warning">Güncelle</a>
+                                        </td>
+                                        <td>
+                                            <button onclick="DeleteWorkingHour(@item.Id,'@item.Day','@item.StartTime','@item.EndTime')" class="btn btn-round btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Sil</button>
+                                            @*<a href="/Admin/WorkingHour/Delete/@item.Id" class="btn btn-round btn-danger">Sil</a>*@
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var _id;
+    function DeleteWorkingHour(id,day, startTime,endTime) {
+        window._id = id;
+        document.getElementById("spanDay").innerHTML = day;
+        document.getElementById("spanStartTime").innerHTML = startTime;
+        document.getElementById("spanEndTime").innerHTML = endTime;
+    }
+    $("#DelWorkingHour").click(function () {
+        $.ajax({
+            url: '/Admin/WorkingHour/Delete/',
+            type: 'POST',
+            data: { id: _id },
+            success: function (response) {
+                window.location.href = '/Admin/WorkingHour/Index/';
+            }
+        });
+    });
+</script>

@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dentist.Business", "Dentist.Business\Dentist.Business.csproj", "{84725310-D756-4720-A28B-649249F65D86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dentist.DataAccess", "Dentist.DataAccess\Dentist.DataAccess.csproj", "{7DE9C492-7968-4F5C-9D26-E25A98DFE8D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dentist.Entities", "Dentist.Entities\Dentist.Entities.csproj", "{C40F66B8-DC7F-4D87-A1A8-7CB8F469FDF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dentist.AspMvcUI", "Dentist.AspMvcUI\Dentist.AspMvcUI.csproj", "{F946456C-86C7-4DDF-9DC5-9D233BF2CBE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dentist.RestApi", "Dentist.RestApi\Dentist.RestApi.csproj", "{50E33466-032E-4D11-B464-E0D3C908EB19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84725310-D756-4720-A28B-649249F65D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84725310-D756-4720-A28B-649249F65D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84725310-D756-4720-A28B-649249F65D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84725310-D756-4720-A28B-649249F65D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DE9C492-7968-4F5C-9D26-E25A98DFE8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE9C492-7968-4F5C-9D26-E25A98DFE8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE9C492-7968-4F5C-9D26-E25A98DFE8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE9C492-7968-4F5C-9D26-E25A98DFE8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40F66B8-DC7F-4D87-A1A8-7CB8F469FDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40F66B8-DC7F-4D87-A1A8-7CB8F469FDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40F66B8-DC7F-4D87-A1A8-7CB8F469FDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40F66B8-DC7F-4D87-A1A8-7CB8F469FDF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F946456C-86C7-4DDF-9DC5-9D233BF2CBE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F946456C-86C7-4DDF-9DC5-9D233BF2CBE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F946456C-86C7-4DDF-9DC5-9D233BF2CBE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F946456C-86C7-4DDF-9DC5-9D233BF2CBE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50E33466-032E-4D11-B464-E0D3C908EB19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50E33466-032E-4D11-B464-E0D3C908EB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50E33466-032E-4D11-B464-E0D3C908EB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50E33466-032E-4D11-B464-E0D3C908EB19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {599B4B4C-744B-45E0-AE49-83E1F310A4EA}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://notyetnigga.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Dentist.Business\\Dentist.Business.csproj
+		SccProjectName1 = Dentist.Business
+		SccLocalPath1 = Dentist.Business
+		SccProjectUniqueName2 = Dentist.DataAccess\\Dentist.DataAccess.csproj
+		SccProjectName2 = Dentist.DataAccess
+		SccLocalPath2 = Dentist.DataAccess
+		SccProjectUniqueName3 = Dentist.Entities\\Dentist.Entities.csproj
+		SccProjectName3 = Dentist.Entities
+		SccLocalPath3 = Dentist.Entities
+		SccProjectUniqueName4 = Dentist.AspMvcUI\\Dentist.AspMvcUI.csproj
+		SccProjectName4 = Dentist.AspMvcUI
+		SccLocalPath4 = Dentist.AspMvcUI
+		SccProjectUniqueName5 = Dentist.RestApi\\Dentist.RestApi.csproj
+		SccProjectName5 = Dentist.RestApi
+		SccLocalPath5 = Dentist.RestApi
+	EndGlobalSection
+EndGlobal

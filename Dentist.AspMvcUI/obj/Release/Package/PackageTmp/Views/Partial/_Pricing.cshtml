@@ -1,0 +1,61 @@
+﻿@model List<Dentist.Entities.Model.Service>
+@{
+    var seeAll = (ViewData["isSeeAll"] == null) ? false : (bool)ViewData["isSeeAll"];
+}
+
+<!-- Dento Pricing Table Area Start -->
+<section class="dento-pricing-table-area section-padding-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Fiyatlandırma</h2>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @if (Model == null || Model.Count <= 0)
+                {
+                    <span>Gösterilecek fiyatlandırma bilgisi bulunamadı.</span>
+                }
+                else
+                {
+                    <div class="dento-price-table table-responsive">
+                        <table class="table table-borderless mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hizmet Adı</th>
+                                    <th scope="col">Seans</th>
+                                    <th scope="col">Fiyat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var service in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@service.Title</th>
+                                        <td>@service.Period</td>
+                                        <td>@service.Price ₺</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+
+            @if (seeAll)
+            {
+                <div class="col-12">
+                    <div class="more-btn text-center mt-50">
+                        <a href="/Pricing/Index" class="btn dento-btn">TÜMÜNÜ GÖR<i class="fa fa-angle-double-right"></i></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Dento Pricing Table Area End -->
